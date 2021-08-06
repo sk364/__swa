@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { HashRouter, Route } from "react-router-dom";
 
-function App() {
+import Home from "./home";
+import Page1 from "./page1";
+import Page2 from "./page2";
+import { p } from "./constants";
+
+const App = () => {
+  const item = localStorage.getItem("p");
+  if (!item || item !== btoa(p)) return null;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter basename="/">
+      <Route exact path="/" component={Home} />
+      <Route exact path="/page1" component={Page1} />
+      <Route exact path="/page2" component={Page2} />
+    </HashRouter>
   );
 }
 
